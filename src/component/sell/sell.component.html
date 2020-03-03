@@ -1,0 +1,38 @@
+<div class="container p-5">
+
+    <div *ngIf="isLoading; else elseBlock">
+        <div class="loading"><img width="50" height="50" src="../../assets/loading4.gif" /></div>
+    </div>
+    <ng-template #elseBlock>
+
+    <label>Select a stock you want to sell:</label>
+    <div class="form-group">
+        <select [(ngModel)]="selectedStock" (change)="onSelectStock()" class="form-control dropdown-class">
+            <option [ngValue]="null" selected disabled hidden>Choose here</option>
+            <option *ngFor="let stock of stocks" [ngValue]="stock">
+                {{ stock.symbol }}
+            </option>
+        </select>
+    </div>
+    <br>
+    <div [hidden]="isShow">
+        <p>You have <b>{{ selectedStock.name }}</b> with <b>{{ this.currentShares }}</b> shares!</p>
+        <label>The number to sell:</label>
+        <form (ngSubmit)="onSubmitSell()">
+            <div class="form-group">
+                <input [(ngModel)]="sharesToBeSold" 
+                (change)="onChangeShares()"
+                required
+                autofocus
+                type="number" 
+                id="shares"
+                class="form-control"
+                name="shares"
+                min="1" 
+                max="1000000">
+            </div>
+            <button class="btn btn-primary" type="submit">Sell</button>
+        </form>
+    </div>
+    </ng-template>
+</div>

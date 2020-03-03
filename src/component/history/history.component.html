@@ -1,0 +1,100 @@
+<div class="container p-5">
+    <label>Select which information you want to know:</label>
+    <div class="form-group">
+        <select [(ngModel)]="selectedNum" (change)="onSelectItem()" class="form-control dropdown-class">
+            <option [ngValue]="-1" selected disabled hidden>Choose here</option>
+            <option [ngValue]="1">The most profitable stock in inventory</option>
+            <option [ngValue]="2">The rank of stocks profitability</option>
+            <option [ngValue]="3">The stock has highest price in inventory</option>
+            <option [ngValue]="4">something else...</option>
+        </select>
+    </div>
+    <div [ngSwitch]="selectedNum">
+        <div class="card my-5" *ngSwitchCase="1">
+            <div class="card-body">
+            <table class="table table-bordered table-striped table-hover table-dark">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Shares</th>
+                    <th scope="col">Current Price</th>
+                    <th scope="col">Total Price</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">Total Cost</th>
+                    <th scope="col">Earnings</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngIf="targetStock">
+                    <td>{{ targetStock.name }}</td>
+                    <td>{{ targetStock.shares }}</td>
+                    <td>{{ targetStock.price | currency :'USD':'symbol':'1.2-2' }}</td>
+                    <td>{{ targetStock.total | currency :'USD':'symbol':'1.2-2' }}</td>
+                    <td>{{ targetStock.cost | currency :'USD':'symbol':'1.2-2'}}</td>
+                    <td>{{ targetStock.cost * targetStock.shares | currency :'USD':'symbol':'1.2-2'}}</td>
+                    <td>{{ targetStock.total - (targetStock.cost * targetStock.shares) | currency :'USD':'symbol':'1.2-2'}}</td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+        <div class="card my-5" *ngSwitchCase="2">
+            <div class="card-body">
+            <table class="table table-bordered table-striped table-hover table-dark">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Shares</th>
+                    <th scope="col">Current Price</th>
+                    <th scope="col">Total Price</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">Total Cost</th>
+                    <th scope="col">Earnings</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let stock of stocks">
+                        <td>{{ stock.name }}</td>
+                        <td>{{ stock.shares }}</td>
+                        <td>{{ stock.price | currency :'USD':'symbol':'1.2-2' }}</td>
+                        <td>{{ stock.total | currency :'USD':'symbol':'1.2-2' }}</td>
+                        <td>{{ stock.cost | currency :'USD':'symbol':'1.2-2'}}</td>
+                        <td>{{ stock.cost * stock.shares | currency :'USD':'symbol':'1.2-2'}}</td>
+                        <td>{{ stock.total - (stock.cost * stock.shares) | currency :'USD':'symbol':'1.2-2'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+
+        <div class="card my-5" *ngSwitchCase="3">
+            <div class="card-body">
+            <table class="table table-bordered table-striped table-hover table-dark">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Shares</th>
+                    <th scope="col">Current Price</th>
+                    <th scope="col">Total Price</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">Total Cost</th>
+                    <th scope="col">Earnings</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="targetStock">
+                    <td>{{ targetStock.name }}</td>
+                    <td>{{ targetStock.shares }}</td>
+                    <td>{{ targetStock.price | currency :'USD':'symbol':'1.2-2' }}</td>
+                    <td>{{ targetStock.total | currency :'USD':'symbol':'1.2-2' }}</td>
+                    <td>{{ targetStock.cost | currency :'USD':'symbol':'1.2-2'}}</td>
+                    <td>{{ targetStock.cost * targetStock.shares | currency :'USD':'symbol':'1.2-2'}}</td>
+                    <td>{{ targetStock.total - (targetStock.cost * targetStock.shares) | currency :'USD':'symbol':'1.2-2'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>

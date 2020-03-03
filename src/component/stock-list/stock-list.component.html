@@ -1,0 +1,41 @@
+<div *ngIf="condition; else elseBlock">
+  <div class="loading"><img width="50" height="50" src="../../assets/loading4.gif" /></div>
+</div>
+<ng-template #elseBlock>
+  <div class="card my-5">
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Symbol</th>
+            <th scope="col">Name</th>
+            <th scope="col">Shares</th>
+            <th scope="col">Current Price</th>
+            <th scope="col">TOTAL</th>
+            <!-- <th scope="col">Cost</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stock of stocks">
+            <td>{{ stock.symbol }}</td>
+            <td>{{ stock.name }}</td>
+            <td>{{ stock.shares }}</td>
+            <td>{{ stock.price | currency :'USD':'symbol':'1.2-2' }}</td>
+            <td>{{ stock.total | currency :'USD':'symbol':'1.2-2' }}</td>
+            <!-- <td>{{ stock.cost | currency :'USD':'symbol':'1.2-2' }}</td> -->
+          </tr>
+          <tr>
+            <td colspan="4">CASH</td>
+            <td>{{ cash | currency :'USD':'symbol':'1.2-2' }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+              <td colspan="4"></td>
+              <td><b>{{ total | currency :'USD':'symbol':'1.2-2' }}</b></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,35 @@
+<div class="container p-5">     
+
+    <form (ngSubmit)="onSubmitQuote()">
+        <div class="form-group">
+            <input type="text"
+            [(ngModel)]="stock.symbol"
+            autocomplete="off"
+            autofocus
+            name="symbol"
+            class="form-control"
+            id="symbol"
+            placeholder="Symbol"
+            required>
+        </div>
+        <button class="btn btn-primary" type="submit">Quote</button>
+    </form>
+    <br>
+    <div [hidden]="isShow">
+        <p><b>{{ stock.name }}</b> costs <b>${{ stock.price }}</b></p>
+        <form (ngSubmit)="onSubmitBuy()">
+            <div class="form-group">
+                <input [(ngModel)]="stock.shares" 
+                required
+                autofocus
+                type="number" 
+                id="shares"
+                class="form-control"
+                name="shares"
+                min="1" 
+                max="1000000">
+            </div>
+            <button class="btn btn-primary" type="submit">Buy</button>
+        </form>
+    </div>
+</div>
